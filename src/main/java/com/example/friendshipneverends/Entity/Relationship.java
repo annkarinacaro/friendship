@@ -17,13 +17,13 @@ public class Relationship {
   @Column(name = "relationship_id", length = 11, nullable = false)
   private int relationshipId;
   @ManyToOne
-  @JoinColumn(name= "sourceUser",referencedColumnName = "email", nullable = false)
+  @JoinColumn(name= "sourceUser",referencedColumnName = "email")
   private User sourceUser;
   @ManyToOne
-  @JoinColumn(name = "destinationUser", referencedColumnName = "email", nullable = false)
+  @JoinColumn(name = "destinationUser", referencedColumnName = "email")
   private User destinationUser;
   @Basic
-  @Column(name="connection", length =200, nullable = false)
+  @Column(name="connection", length =200)
   private String connection;
 
   public Relationship(User sourceUser, User destinationUser, String connection) {
