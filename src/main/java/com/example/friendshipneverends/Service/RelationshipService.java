@@ -21,11 +21,8 @@ public class RelationshipService {
     }
 
     public void manipulateRelationship(Protocol protocol){
-        User source = userRepository.findByEmail(protocol.getSourceEmail());
-        if(source == null) source = new User(protocol.getSourceEmail(), protocol.getSourceHost());
-
-        User destination = userRepository.findByEmail(protocol.getDestinationEmail());
-        if(destination == null) destination = new User(protocol.getDestinationEmail(), protocol.getDestinationHost());
+        String source = protocol.getSourceEmail();
+        String destination = protocol.getDestinationEmail();
         Relationship relationship  = relationshipRepository.findBySourceUserAndDestinationUser(source, destination);
         //Check both ways
         Relationship backwardsRelationship = relationshipRepository.findBySourceUserAndDestinationUser(destination, source);
@@ -44,7 +41,7 @@ public class RelationshipService {
             case "ACCEPT":          //accept a frien request you have received
                 //If their current relationship is a pending friendship
                 if(relationship != null){
-                    if(relationship.getConnection().equals("REQUEST") && relationship.getSourceUser().getEmail().equals(protocol.getDestinationEmail())){
+                    if(relationship.getConnection().equals("REQUEST") && relationship.getSourceUser().equals(protocol.getDestinationEmail())){
                         relationship.setConnection("FRIEND");
                         relationshipRepository.save(relationship);
                     }

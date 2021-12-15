@@ -5,5 +5,5 @@ import com.example.friendshipneverends.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RelationshipRepository extends JpaRepository<Relationship, Integer>{
-    Relationship findBySourceUserAndDestinationUser(User source, User destination);
+    Relationship findBySourceUserAndDestinationUser(String source, String destination);
 }

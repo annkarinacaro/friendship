@@ -16,17 +16,17 @@ public class Relationship {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "relationship_id", length = 11, nullable = false)
   private int relationshipId;
-  @ManyToOne
-  @JoinColumn(name= "sourceUser",referencedColumnName = "email", nullable = false)
-  private User sourceUser;
-  @ManyToOne
+
+  @JoinColumn(name= "sourceUser",referencedColumnName = "email", nullable =  false)
+  private String sourceUser;
+
   @JoinColumn(name = "destinationUser", referencedColumnName = "email", nullable = false)
-  private User destinationUser;
+  private String destinationUser;
   @Basic
   @Column(name="connection", length =200, nullable = false)
   private String connection;
 
-  public Relationship(User sourceUser, User destinationUser, String connection) {
+  public Relationship(String sourceUser, String destinationUser, String connection) {
     this.sourceUser = sourceUser;
     this.destinationUser = destinationUser;
     this.connection = connection;
@@ -40,19 +40,19 @@ public class Relationship {
     this.relationshipId = relationshipId;
   }
 
-  public User getSourceUser() {
+  public String getSourceUser() {
     return sourceUser;
   }
 
-  public void setSourceUser(User sourceUser) {
+  public void setSourceUser(String sourceUser) {
     this.sourceUser = sourceUser;
   }
 
-  public User getDestinationUser() {
+  public String getDestinationUser() {
     return destinationUser;
   }
 
-  public void setDestinationUser(User destinationUser) {
+  public void setDestinationUser(String destinationUser) {
     this.destinationUser = destinationUser;
   }
 
