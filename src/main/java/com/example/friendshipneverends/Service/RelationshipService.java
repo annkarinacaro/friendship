@@ -22,7 +22,10 @@ public class RelationshipService {
 
     public void manipulateRelationship(Protocol protocol){
         User source = userRepository.findByEmail(protocol.getSourceEmail());
+        if(source == null) source = new User(protocol.getSourceEmail(), protocol.getSourceHost());
+
         User destination = userRepository.findByEmail(protocol.getDestinationEmail());
+        if(destination == null) destination = new User(protocol.getDestinationEmail(), protocol.getDestinationHost());
         Relationship relationship  = relationshipRepository.findBySourceUserAndDestinationUser(source, destination);
         //Check both ways
         Relationship backwardsRelationship = relationshipRepository.findBySourceUserAndDestinationUser(destination, source);
